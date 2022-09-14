@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/product_detail_screen.dart';
+import 'package:myshop/ui/products/product_overview_screen.dart';
 import 'package:myshop/ui/products/products_manager.dart';
 
 void main() {
@@ -21,10 +22,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           ).copyWith(secondary: Colors.deepOrange,)
       ),
-      home: SafeArea(
-        child: ProductDetailScreen(
-          ProductsManager().items[0],
-        ),
+      home: const SafeArea(
+        // child: ProductDetailScreen(
+        //   ProductsManager().items[0],
+        //),
+        child: ProductsOverviewScreen(),
       ),
     );
   }
