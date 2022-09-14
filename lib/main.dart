@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/product_detail_screen.dart';
 import 'package:myshop/ui/products/product_overview_screen.dart';
 import 'package:myshop/ui/products/products_manager.dart';
+import 'package:myshop/ui/products/user_products_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
         // child: ProductDetailScreen(
         //   ProductsManager().items[0],
         //),
-        child: ProductsOverviewScreen(),
+        // child: ProductsOverviewScreen(),
+      // ),
+      child: UserProducScreen(),
       ),
     );
   }
