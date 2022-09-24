@@ -3,6 +3,7 @@ import 'package:myshop/ui/products/product_detail_screen.dart';
 import 'package:myshop/ui/products/product_overview_screen.dart';
 import 'package:myshop/ui/products/products_manager.dart';
 import 'package:myshop/ui/products/user_products_screen.dart';
+import 'ui/cart/cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,20 +19,21 @@ class MyApp extends StatelessWidget {
       title: 'My Shop',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Lato',
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-          ).copyWith(secondary: Colors.deepOrange,)
-      ),
+          fontFamily: 'Lato',
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue,
+          ).copyWith(
+            secondary: Colors.deepOrange,
+          )),
       home: const SafeArea(
         // child: ProductDetailScreen(
         //   ProductsManager().items[0],
         //),
-        // child: ProductsOverviewScreen(),
-      // ),
-      child: UserProducScreen(),
+        //   child: ProductsOverviewScreen(),
+        // ),
+        // child: UserProductScreen(),
+        child: CartScreen(),
       ),
     );
   }
 }
-

@@ -15,9 +15,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My shop'), 
-        actions: <Widget>[
+      appBar: AppBar(title: const Text('My shop'), actions: <Widget>[
         buildProductFilterMenu(),
         buildShoppingCartIcon(),
       ]),
@@ -53,7 +51,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           child: Text('Only Favorites'),
         ),
         const PopupMenuItem(
-          value: FilterOptions.favorites,
+          value: FilterOptions.all,
           child: Text('Show All'),
         )
       ],
