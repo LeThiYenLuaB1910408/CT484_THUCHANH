@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
+import 'package:provider/provider.dart';
 
 import 'products_grid.dart';
 import '../shared/app_drawer.dart';
@@ -28,13 +29,18 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   }
 
   Widget buildShoppingCartIcon() {
-    return TopRightBadge(
-      data: CartManager().productCount,
-      child: IconButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(CartScreen.routeName);
-          },
-          icon: const Icon(Icons.shopping_cart)),
+    return Consumer<CartManager>(
+      builder: (context, value, child) {
+        return TopRightBadge(
+          data: CartManager().productCount,
+          child: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartScreen.routeName);
+            },
+            icon: const Icon(Icons.shopping_cart),
+          ),
+        );
+      },
     );
   }
 

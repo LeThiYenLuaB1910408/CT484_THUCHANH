@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myshop/ui/screens.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/product.dart';
 
@@ -62,7 +64,22 @@ class ProductGridTile extends StatelessWidget {
           Icons.shopping_cart,
         ),
         onPressed: () {
-          print('Add items to cart');
+          final cart = context.read<CartManager>();
+          cart.addItem(product);
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: const Text('Item added to cart'),
+                duration: const Duration(seconds: 10),
+                action: SnackBarAction(
+                  label: 'UNDO',
+                  onPressed: () {
+                    cart.removeSingleItem(product.id!);
+                  },
+                ),
+              ),
+            );
         },
         color: Theme.of(context).colorScheme.secondary,
       ),
