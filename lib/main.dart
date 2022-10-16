@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'ui/screens.dart';
 
 void main() {
@@ -11,45 +12,52 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Shop',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Lato',
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
-          ).copyWith(
-            secondary: Colors.deepOrange,
-          )),
-      // home: const SafeArea(
-      //   // child: ProductDetailScreen(
-      //   //   ProductsManager().items[0],
-      //   //),
-      //   //   child: ProductsOverviewScreen(),
-      //   // ),
-      //   // child: UserProductScreen(),
-      //   // child: CartScreen(),
-      //   child: OrdersScreen(),
-      // ),
-      home: const ProductsOverviewScreen(),
-      routes: {
-        CartScreen.routeName: (ctx) => const CartScreen(),
-        OrdersScreen.routeName: (ctx) => const OrdersScreen(),
-        UserProductScreen.routeName: (ctx) => const UserProductScreen(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == ProductDetailScreen.routeName) {
-          final productId = settings.arguments as String;
-          return MaterialPageRoute(
-            builder: (ctx) {
-              return ProductDetailScreen(
-                ProductsManager().findById(productId),
-              );
-            },
-          );
-        }
-        return null;
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => ProductsManager(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'My Shop',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: 'Lato',
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.blue,
+            ).copyWith(
+              secondary: Colors.deepOrange,
+            )),
+        // home: const SafeArea(
+        //   // child: ProductDetailScreen(
+        //   //   ProductsManager().items[0],
+        //   //),
+        //   //   child: ProductsOverviewScreen(),
+        //   // ),
+        //   // child: UserProductScreen(),
+        //   // child: CartScreen(),
+        //   child: OrdersScreen(),
+        // ),
+        home: const ProductsOverviewScreen(),
+        routes: {
+          CartScreen.routeName: (ctx) => const CartScreen(),
+          OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+          UserProductScreen.routeName: (ctx) => const UserProductScreen(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == ProductDetailScreen.routeName) {
+            final productId = settings.arguments as String;
+            return MaterialPageRoute(
+              builder: (ctx) {
+                return ProductDetailScreen(
+                  ctx.read<ProductsManager>().findById(productId),
+                );
+              },
+            );
+          }
+          return null;
+        },
+      ),
     );
   }
 }
